@@ -131,29 +131,63 @@ void *LinkedList_popback(LinkedList *lst_ptr){
 //////////////
 
 void LinkedListIterator_move_to_first(LinkedListIterator *itr_ptr){
-
+	itr_ptr->current = itr_ptr->lst_ptr->first;
+	itr_ptr->index = 0;
 }
 
 void LinkedListIterator_move_to_last(LinkedListIterator *itr_ptr){
-
+	itr_ptr->current = itr_ptr->lst_ptr->last;
+	itr_ptr->index = itr_ptr->lst_ptr->->size - 1;
 }
 
 void LinkedListIterator_move_to_next(LinkedListIterator *itr_ptr){
+	if(itr_ptr->current != NULL){
+		itr_ptr->current = itr_ptr->current->next;
+		
+		if(itr_ptr->current != NULL){
+			itr_ptr->index++;
+		}
 
+		else{
+			itr_ptr->index = LINKEDLIST_INDEX_END;
+		}
+	}
+
+	else if(itr_ptr->index == LINKEDLIST_INDEX_START){
+		itr_ptr->index = LINKEDLIST_INDEX_START;
+	}
 }
 
 void LinkedListIterator_move_to_previous(LinkedListIterator *itr_ptr){
+	if(itr_ptr->current != NULL){
+		itr_ptr->current = itr_ptr->previous;
 
+		if(itr_ptr->current != NULL){
+			itr_ptr->index--;
+		}
+
+		else{
+			itr_ptr->index = LINKEDLIST_INDEX_START;
+		}
+	}
+
+	else if(itr_ptr->index == LINKEDLIST_INDEX_END){
+		itr_ptr->index = LINKEDLIST_INDEX_START;
+	}
 }
 
 void *LinkedListIterator_get_item(LinkedListIterator *itr){
-
+	if (itr_ptr->current != NULL){
+		return itr_ptr->current->value;
+	}
+	else{
+		return NULL;
+	}
 }
 
 int LinkedListIterator_get_index(LinkedListIterator *itr){
-
+	return itr_ptr->index;
 }
-
 
 
 ///////////
@@ -161,9 +195,8 @@ int LinkedListIterator_get_index(LinkedListIterator *itr){
 ///////////
 
 int LinkedList_get_size(LinkedList *lst_ptr){
-
+	return lst_ptr->size;
 }
-
 
 
 #endif
