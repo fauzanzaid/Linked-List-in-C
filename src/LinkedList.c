@@ -7,17 +7,23 @@
 // Data Structures //
 /////////////////////
 
-typedef struct LinkedList{
-
-}LinkedList;
-
 typedef struct Node Node;
 struct Node{
-
+	void *value;
+	Node *next;
+	Node *previous;
 };
 
-typedef struct LinkedListIterator{
+typedef struct LinkedList{
+	int size;
+	Node *first;
+	Node *last;
+}LinkedList;
 
+typedef struct LinkedListIterator{
+	Node *current;
+	int index;
+	LinkedList *lst_ptr;
 }LinkedListIterator;
 
 
