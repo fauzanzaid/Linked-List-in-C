@@ -2,6 +2,14 @@
 #define INCLUDE_GUARD_54BE4DFB1B914CA0BB9CA2013131ACF8
 
 
+//////////////////////
+// Global constants //
+//////////////////////
+
+#define LINKEDLIST_INDEX_START -1
+#define LINKEDLIST_INDEX_END -2
+
+
 /////////////////////
 // Data Structures //
 /////////////////////
