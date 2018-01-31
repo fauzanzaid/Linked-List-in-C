@@ -74,19 +74,54 @@ void LinkedListIterator_destroy(LinkedListIterator *itr_ptr){
 /////////////////////
 
 void LinkedList_push(LinkedList *lst_ptr, void *value){
+	Node *new = malloc( sizeof(Node) );
+	new->value = value;
+	new->previous = NULL;
+	
+	new->next = lst_ptr->first;
+	lst_ptr->first->previous = new;
 
+	lst_ptr->first = new;
+	lst_ptr->size++;
 }
 
 void LinkedList_pushback(LinkedList *lst_ptr, void *value){
+	Node *new = malloc( sizeof(Node) );
+	new->value = value;
+	
+	new->previous = lst_ptr->last;
+	lst_ptr->last->next = new;
 
+	new->next = NULL;
+
+	lst_ptr->last = new;
+	lst_ptr->size++;
 }
 
 void *LinkedList_pop(LinkedList *lst_ptr){
+	Node *node = lst_ptr->first;
+	void *value = node->value;
 
+	lst_ptr->first = node->next;
+	node->next->previous = NULL;
+
+	free(node);
+	lst_ptr->size--;
+
+	return value;
 }
 
 void *LinkedList_popback(LinkedList *lst_ptr){
+	Node *node = lst_ptr->last;
+	void *value = node->value;
 
+	lst_ptr->last = node->previous;
+	node->previous->next = NULL;
+
+	free(node);
+	lst_ptr->size--;
+
+	return value;
 }
 
 
