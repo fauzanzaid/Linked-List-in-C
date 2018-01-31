@@ -49,8 +49,8 @@ void LinkedListIterator_move_to_first(LinkedListIterator *itr_ptr);
 void LinkedListIterator_move_to_last(LinkedListIterator *itr_ptr);
 void LinkedListIterator_move_to_next(LinkedListIterator *itr_ptr);
 void LinkedListIterator_move_to_previous(LinkedListIterator *itr_ptr);
-void *LinkedListIterator_get_item(LinkedListIterator *itr);
-int LinkedListIterator_get_index(LinkedListIterator *itr);
+void *LinkedListIterator_get_item(LinkedListIterator *itr_ptr);
+int LinkedListIterator_get_index(LinkedListIterator *itr_ptr);
 
 
 ///////////
