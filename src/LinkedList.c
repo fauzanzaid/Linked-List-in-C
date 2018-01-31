@@ -32,19 +32,39 @@ typedef struct LinkedListIterator{
 ////////////////////////////////
 
 LinkedList *LinkedList_new(){
+	LinkedList *lst_ptr = malloc( sizeof(LinkedList) );
 
+	lst_ptr->size = 0;
+	lst_ptr->first = NULL;
+	lst_ptr->last = NULL;
+
+	return lst_ptr;
 }
 
 void LinkedList_destroy(LinkedList *lst_ptr){
+	Node *current = lst_ptr->first;
+	Node *next = NULL;
 
+	while(current != NULL){
+		next = current->next;
+		free(current);
+		current = next;
+	}
+
+	free(lst_ptr);
 }
 
 LinkedListIterator *LinkedListIterator_new(LinkedList *lst_ptr){
+	LinkedListIterator *itr_ptr = malloc( sizeof(LinkedListIterator) );
+	itr_ptr->lst_ptr = lst_ptr;
+	lst_ptr->current = NULL;
+	lst_ptr->index = LINKEDLIST_INDEX_START;
 
+	return itr_ptr;
 }
 
 void LinkedListIterator_destroy(LinkedListIterator *itr_ptr){
-
+	free(itr_ptr);
 }
 
 
