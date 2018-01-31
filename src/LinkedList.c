@@ -76,12 +76,20 @@ void LinkedListIterator_destroy(LinkedListIterator *itr_ptr){
 void LinkedList_push(LinkedList *lst_ptr, void *value){
 	Node *new = malloc( sizeof(Node) );
 	new->value = value;
-	new->previous = NULL;
 	
-	new->next = lst_ptr->first;
-	lst_ptr->first->previous = new;
+	if(lst_ptr->first ==  NULL){
+		new->next = NULL;
+		new->previous = NULL;
+		lst_ptr->first = new;
+		lst_ptr->last = new;
+	}
+	else{
+		new->next = lst_ptr->first;
+		new->previous = NULL;
+		lst_ptr->first = new;
+		new->next->previous = new;
+	}
 
-	lst_ptr->first = new;
 	lst_ptr->size++;
 }
 
@@ -89,23 +97,44 @@ void LinkedList_pushback(LinkedList *lst_ptr, void *value){
 	Node *new = malloc( sizeof(Node) );
 	new->value = value;
 	
-	new->previous = lst_ptr->last;
-	lst_ptr->last->next = new;
+	if(lst_ptr->last ==  NULL){
+		new->next = NULL;
+		new->previous = NULL;
+		lst_ptr->first = new;
+		lst_ptr->last = new;
+	}
+	else{
+		new->next = NULL;
+		new->previous = lst_ptr->last;
+		lst_ptr->last = new;
+		new->previous->next = new;
+	}
 
-	new->next = NULL;
-
-	lst_ptr->last = new;
 	lst_ptr->size++;
 }
 
 void *LinkedList_pop(LinkedList *lst_ptr){
 	Node *node = lst_ptr->first;
-	void *value = node->value;
+	void *value;
 
-	lst_ptr->first = node->next;
-	node->next->previous = NULL;
+	if(node == NULL){
+		value = NULL;
+	}
 
-	free(node);
+	else if(node->next == NULL){
+		lst_ptr->first = NULL;
+		lst_ptr->last = NULL;
+		value = node->value;
+		free(node);
+	}
+
+	else{
+		lst_ptr->first = node->next;
+		node->next->previous = NULL;
+		value = node->value;
+		free(node);
+	}
+
 	lst_ptr->size--;
 
 	return value;
@@ -113,12 +142,26 @@ void *LinkedList_pop(LinkedList *lst_ptr){
 
 void *LinkedList_popback(LinkedList *lst_ptr){
 	Node *node = lst_ptr->last;
-	void *value = node->value;
+	void *value;
 
-	lst_ptr->last = node->previous;
-	node->previous->next = NULL;
+	if(node == NULL){
+		value = NULL;
+	}
 
-	free(node);
+	else if(node->previous == NULL){
+		lst_ptr->first = NULL;
+		lst_ptr->last = NULL;
+		value = node->value;
+		free(node);
+	}
+
+	else{
+		lst_ptr->last = node->previous;
+		node->previous->next = NULL;
+		value = node->value;
+		free(node);
+	}
+
 	lst_ptr->size--;
 
 	return value;
