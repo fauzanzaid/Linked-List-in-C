@@ -186,7 +186,7 @@ void LinkedListIterator_move_to_last(LinkedListIterator *itr_ptr){
 void LinkedListIterator_move_to_next(LinkedListIterator *itr_ptr){
 	if(itr_ptr->current != NULL){
 		itr_ptr->current = itr_ptr->current->next;
-		
+
 		if(itr_ptr->current != NULL){
 			itr_ptr->index++;
 		}
@@ -197,14 +197,21 @@ void LinkedListIterator_move_to_next(LinkedListIterator *itr_ptr){
 	}
 
 	else if(itr_ptr->index == LINKEDLIST_INDEX_START){
-		itr_ptr->index = LINKEDLIST_INDEX_START;
+		if(itr_ptr->lst_ptr->first != NULL){
+			itr_ptr->current = itr_ptr->lst_ptr->first;
+			itr_ptr->index = 0;
+		}
+		else{
+			itr_ptr->index = LINKEDLIST_INDEX_END;
+		}
+
 	}
 }
 
 void LinkedListIterator_move_to_previous(LinkedListIterator *itr_ptr){
 	if(itr_ptr->current != NULL){
 		itr_ptr->current = itr_ptr->current->previous;
-
+		
 		if(itr_ptr->current != NULL){
 			itr_ptr->index--;
 		}
@@ -215,7 +222,14 @@ void LinkedListIterator_move_to_previous(LinkedListIterator *itr_ptr){
 	}
 
 	else if(itr_ptr->index == LINKEDLIST_INDEX_END){
-		itr_ptr->index = LINKEDLIST_INDEX_START;
+		if(itr_ptr->lst_ptr->last != NULL){
+			itr_ptr->current = itr_ptr->lst_ptr->last;
+			itr_ptr->index = itr_ptr->lst_ptr->size - 1;
+		}
+		else{
+			itr_ptr->index = LINKEDLIST_INDEX_START;
+		}
+
 	}
 }
 
