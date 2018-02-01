@@ -118,7 +118,7 @@ void *LinkedList_pop(LinkedList *lst_ptr){
 	void *value;
 
 	if(node == NULL){
-		value = NULL;
+		return NULL;
 	}
 
 	else if(node->next == NULL){
@@ -145,7 +145,7 @@ void *LinkedList_popback(LinkedList *lst_ptr){
 	void *value;
 
 	if(node == NULL){
-		value = NULL;
+		return NULL;
 	}
 
 	else if(node->previous == NULL){
