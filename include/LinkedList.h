@@ -39,6 +39,8 @@ void LinkedList_push(LinkedList *lst_ptr, void *value);
 void LinkedList_pushback(LinkedList *lst_ptr, void *value);
 void *LinkedList_pop(LinkedList *lst_ptr);
 void *LinkedList_popback(LinkedList *lst_ptr);
+void *LinkedList_peek(LinkedList *lst_ptr);
+void *LinkedList_peekback(LinkedList *lst_ptr);
 
 
 //////////////

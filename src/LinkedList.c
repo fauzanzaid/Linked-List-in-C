@@ -167,6 +167,28 @@ void *LinkedList_popback(LinkedList *lst_ptr){
 	return value;
 }
 
+void *LinkedList_peek(LinkedList *lst_ptr){
+	Node *node = lst_ptr->first;
+
+	if(node == NULL){
+		return NULL;
+	}
+	else{
+		return node->value;
+	}
+}
+
+void *LinkedList_peekback(LinkedList *lst_ptr){
+	Node *node = lst_ptr->last;
+
+	if(node == NULL){
+		return NULL;
+	}
+	else{
+		return node->value;
+	}
+}
+
 
 
 //////////////
