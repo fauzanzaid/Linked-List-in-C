@@ -55,6 +55,14 @@ void *LinkedListIterator_get_item(LinkedListIterator *itr_ptr);
 int LinkedListIterator_get_index(LinkedListIterator *itr_ptr);
 
 
+///////////////
+// Two lists //
+///////////////
+
+void LinkedList_append(LinkedList *lst_dest_ptr, LinkedList *lst_src_ptr);
+void LinkedList_prepend(LinkedList *lst_dest_ptr, LinkedList *lst_src_ptr);
+
+
 ///////////
 // Other //
 ///////////

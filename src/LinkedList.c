@@ -190,6 +190,35 @@ void *LinkedList_peekback(LinkedList *lst_ptr){
 }
 
 
+///////////////
+// Two lists //
+///////////////
+
+void LinkedList_append(LinkedList *lst_dest_ptr, LinkedList *lst_src_ptr){
+	lst_dest_ptr->last->next = lst_src_ptr->first;
+	lst_src_ptr->first->previous = lst_dest_ptr->last;
+
+	lst_dest_ptr->last = lst_src_ptr->last;
+	lst_src_ptr->first = NULL;
+	lst_src_ptr->last = NULL;
+
+	lst_dest_ptr->size += lst_src_ptr->size;
+	lst_src_ptr->size = 0;
+}
+
+void LinkedList_prepend(LinkedList *lst_dest_ptr, LinkedList *lst_src_ptr){
+	lst_dest_ptr->first->previous = lst_src_ptr->last;
+	lst_src_ptr->last->next = lst_dest_ptr->first;
+
+	lst_dest_ptr->first = lst_src_ptr->first;
+	lst_src_ptr->first = NULL;
+	lst_dest_ptr->first = NULL;
+
+	lst_dest_ptr->size += lst_src_ptr->size;
+	lst_src_ptr->size = 0;
+}
+
+
 
 //////////////
 // Traverse //
